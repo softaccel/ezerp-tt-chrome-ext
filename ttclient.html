@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta content="utf-8" http-equiv="encoding">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>EzERP TimeTracking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <!--    <base href="/" />-->
+    <!--    <meta name="description" content="This is an example dashboard created using build-in elements and components.">-->
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+    <meta content="no-cache" http-equiv="Pragma"/>
+    <meta content="0" http-equiv="Expires"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <style>
+        .loading-overlay {
+            position: fixed; /* Sit on top of the page content */
+            width: 100%; /* Full width (cover the whole page) */
+            height: 100%; /* Full height (cover the whole page) */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #fdfdfd; /* Black background with opacity */
+            z-index: 100; /* Specify a stack order in case you're using a different order for other elements */
+            cursor: pointer; /* Add a pointer on hover */
+        }
+        #projectSelect ul{
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+        #projectSelect li{
+            padding: 5px;
+        }
+        body{
+            font-family: Poppins,'Source Sans Pro';
+            background: none;
+        }
+        .vertical-center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+    </style>
+</head>
+<body class="bg-light">
+<div id="invalidApiUrl" class="loading-overlay" style="display: none">
+    <p class="vertical-center">
+        Invalid API URL. Please configure it using the extension options.
+    </p>
+</div>
+<div id="loader" class="loading-overlay">
+    <div class="vertical-center">
+        Loading...
+    </div>
+</div>
+<div class="container-fluid p-2 text-center">
+    <h4 class="p-2 rounded rounded-lg bg-dark text-white "><img src="images/icon32.png"> Pontaj</h4>
+    <div id="login">
+        <form id="lookupform">
+            <input type="text" name="uid" id="userId" value="" required class="form-control" placeholder="ID Angajat">
+            <button type="submit" id="submButt" class="mt-1 btn btn-primary form-control">Verifica stare</button>
+        </form>
+    </div>
+    <div id="invalidCode" style="display: none">
+        Codul introdus este invalid
+    </div>
+    <div id="stopOk" style="display: none">
+        <p>
+            Pontajul a fost oprit.
+        </p>
+        <p>
+            Ai lucrat in total <span class="durationh"></span> ore si <span class="durationm"></span> minute
+        </p>
+        <button class=""></button>
+
+    </div>
+    <div id="severError" style="display: none">
+        Eroare pe server
+    </div>
+    <div id="serviceUnavail" style="display: none">
+        Serviciul este indisponibil
+    </div>
+    <div id="unknowError" style="display: none">
+        Eroare necunoscuta
+    </div>
+
+    <div id="projectSelect" style="display: none">
+        <h3></h3>
+        <form onsubmit="event.preventDefault();startWork(this);">
+            <select name="project">
+                <option value="<%= id %>"><%= attributes.order_name ? attributes.order_name : "fara nume" %> <%= attributes.op_name ? "/ "+attributes.op_name : "fara nume" %></option>
+            </select>
+            <button class="btn btn-success">Incepe pontarea</button>
+            <button class="btn btn-secondary" type="button" onclick="backToLogin()">Anuleaza</button>
+        </form>
+    </div>
+    <div id="working" style="display: none">
+        <h2 class="emplName"></h2>
+        <h3 class="project"></h3>
+        <h4 class="operation"></h4>
+        <h5>In lucru de <span class="elapsedTime"></span> ore</h5>
+        <button onclick="stopWork(this);" class="btn btn-danger">Opreste lucru</button>
+        <button onclick="backToLogin()" class="btn btn-secondary">Inapoi</button>
+    </div>
+</div>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/komponentor.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="js/apiator.js"></script>
+<script src="js/bootstrap.bundle.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

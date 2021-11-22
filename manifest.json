@@ -1,0 +1,38 @@
+{
+  "name": "EzERP-Pontaj",
+  "description": "Timetracking on the next level!",
+  "version": "1.1",
+  "manifest_version": 3,
+  "update_url": "https://tools.softaccel.net/ezerp/ttext.xml",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "activeTab", "scripting"],
+  "content_security_policy": {
+    "script-src": ["self","unsafe-eval"],
+    "object-src": ["self"]
+  },
+  "sandbox": {
+    "pages": ["ttclient.html"]
+  },
+  "ExtensionInstallSources": [
+    "https://tools.softaccel.net/*"
+  ],
+  "options_page": "options.html",
+  "host_permissions": ["https://*/"],
+  "action": {
+    "default_popup": "app.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
+}
