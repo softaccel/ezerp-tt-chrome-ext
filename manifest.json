@@ -1,7 +1,7 @@
 {
   "name": "EzERP-Pontaj",
   "description": "Timetracking on the next level!",
-  "version": "1.1",
+  "version": "1.2",
   "manifest_version": 3,
   "update_url": "https://tools.softaccel.net/ezerp/ttext.xml",
   "background": {
