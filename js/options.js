@@ -2,8 +2,10 @@
 function save_options(event) {
     event.preventDefault();
     var apiUrl = event.target.apiUrl.value;
+    var userId = event.target.userId.value;
     chrome.storage.sync.set({
-        apiUrl: apiUrl
+        apiUrl: apiUrl,
+        userId: userId
     }, function() {
         // Update status to let user know options were saved.
         var status = document.getElementById('alert');

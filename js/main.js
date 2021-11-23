@@ -1,31 +1,41 @@
 let apiUrl = "https://localhost/dbapi/v2/spaleck";
-
+let userId = null;
 // https://localhost/dbapi/v2/spaleck
 
-$("#lookupform").on("submit",checkuser);
-$("#test").on("click",function () {
-    parent.postMessage({a:1},"*");
-});
-
+// $("#lookupform").on("submit",checkuser);
 // changeColor.addEventListener("click", );
 
 window.addEventListener('message', function(event) {
-    if(event.data.apiUrl===null || event.data.apiUrl==="") {
-        $("#invalidApiUrl").show();
-        $("#loader").fadeOut();
-        return;
+    console.log(event);
+    if(event.data.command==="sync") {
+        if(typeof event.data.data.apiUrl==="undefined" || event.data.data.apiUrl===null) {
+            $("#invalidApiUrl").show();
+            $("#loader").fadeOut();
+            return;
+        }
+
+        apiUrl = event.data.data.apiUrl;
+
+        if(typeof event.data.data.userId==="undefined" || event.data.data.userId===null) {
+            $("#invalidUserId").show();
+            $("#loader").fadeOut();
+            return;
+        }
+        userId = event.data.data.userId;
+
+       checkuser();
     }
 
-    apiUrl = event.data.apiUrl;
-    console.log("@@@",event,event.data);
-    if(event.data.userId===null || event.data.userId==="") {
-        $("#loader").fadeOut();
-        return;
-    }
-    $("#userId").val(event.data.userId);
-    $("#submButt").trigger("click");
+
+    // if(event.data.userId===null || event.data.userId==="") {
+    //     $("#loader").fadeOut();
+    //     return;
+    // }
+    // $("#userId").val(event.data.userId);
+    // $("#submButt").trigger("click");
 
 });
+parent.postMessage({command:"get",data:{apiUrl:null,userId:null}},"*");
 
 
 function stopWork() {
@@ -43,7 +53,7 @@ function stopWork() {
             $("#stopOk .durationm").text(Math.floor(data.attributes.duration%60));
             setTimeout(function () {
                 $("#stopOk").fadeOut();
-                $('#login').fadeIn();
+                checkuser();
             },3000);
         })
 }
@@ -75,7 +85,7 @@ function startWork(src) {
             checkuser();
         })
         .catch(function (xhr) {
-
+            $("#unknownErr").text(JSON.stringify(xhr)).fadeIn();
         });
 
 }
@@ -88,21 +98,17 @@ function backToLogin() {
     parent.postMessage({command:"saveUser",data:{userId:null}},"*");
 
 }
-function checkuser(event) {
-    if(event) event.preventDefault();
-
-    let form = $("#lookupform")[0];
+function checkuser() {
     $("#loader").fadeIn();
 
-    let inst = $("<span>").apiator({returninstance: true,resourcetype: "item"});
-    inst.setUrl(apiUrl+"/tags/"+form.uid.value+"?include=started_work,emplid,alloc_orders")
+    $("<span>").apiator({returninstance: true,resourcetype: "item"})
+        .setUrl(apiUrl+"/tags/"+userId+"?include=started_work,emplid,alloc_orders")
         .loadFromRemote()
         .then(function (data) {
-            parent.postMessage({command:"saveUser",data:{userId:form.uid.value}},"*");
-            $("#login").hide();
+            $("#loader").fadeOut();
+
             current_ttregistry = data;
 
-            $("#loader").fadeOut();
             if(data.relationships.started_work.length) {
                 let cont = $("#working").fadeIn();
                 if(data.relationships.started_work[0].attributes.order_label) {
@@ -181,7 +187,10 @@ function checkuser(event) {
                     cb = ()=>$("#unknowError").fadeOut();
             }
             setTimeout(cb,2000);
-            form.uid.disabled = false;
-            form.submButt.disabled = false;
         });
 }
+
+
+
+
+

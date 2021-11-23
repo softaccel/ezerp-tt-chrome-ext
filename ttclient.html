@@ -66,16 +66,23 @@
     </div>
 </div>
 <div class="container-fluid p-2 text-center">
-    <h4 class="p-2 rounded rounded-lg bg-dark text-white "><img src="images/icon32.png"> Pontaj</h4>
-    <div id="login">
+    <h4 class="p-2 rounded rounded-lg bg-dark text-white "><img src="images/icon32.png"> Pontaj SportsGames </h4>
+    <div id="login" class="d-none">
         <form id="lookupform">
             <input type="text" name="uid" id="userId" value="" required class="form-control" placeholder="ID Angajat">
             <button type="submit" id="submButt" class="mt-1 btn btn-primary form-control">Verifica stare</button>
         </form>
     </div>
+    <div id="invalidUserId" style="display: none">
+        Utilizatorul nu este valid
+    </div>
+    <div id="unknownErr" style="display: none">
+        Utilizatorul nu este valid
+    </div>
     <div id="invalidCode" style="display: none">
         Codul introdus este invalid
     </div>
+
     <div id="stopOk" style="display: none">
         <p>
             Pontajul a fost oprit.
@@ -83,7 +90,7 @@
         <p>
             Ai lucrat in total <span class="durationh"></span> ore si <span class="durationm"></span> minute
         </p>
-        <button class=""></button>
+<!--        <button class="btn btn-secondary" onclick="checkuser()">OK</button>-->
 
     </div>
     <div id="severError" style="display: none">
@@ -103,7 +110,7 @@
                 <option value="<%= id %>"><%= attributes.order_name ? attributes.order_name : "fara nume" %> <%= attributes.op_name ? "/ "+attributes.op_name : "fara nume" %></option>
             </select>
             <button class="btn btn-success">Incepe pontarea</button>
-            <button class="btn btn-secondary" type="button" onclick="backToLogin()">Anuleaza</button>
+<!--            <button class="btn btn-secondary" type="button" onclick="backToLogin()">Anuleaza</button>-->
         </form>
     </div>
     <div id="working" style="display: none">
@@ -112,7 +119,7 @@
         <h4 class="operation"></h4>
         <h5>In lucru de <span class="elapsedTime"></span> ore</h5>
         <button onclick="stopWork(this);" class="btn btn-danger">Opreste lucru</button>
-        <button onclick="backToLogin()" class="btn btn-secondary">Inapoi</button>
+<!--        <button onclick="backToLogin()" class="btn btn-secondary">Inapoi</button>-->
     </div>
 </div>
 

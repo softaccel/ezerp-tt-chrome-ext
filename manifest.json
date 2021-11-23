@@ -15,9 +15,6 @@
   "sandbox": {
     "pages": ["ttclient.html"]
   },
-  "ExtensionInstallSources": [
-    "https://tools.softaccel.net/*"
-  ],
   "options_page": "options.html",
   "host_permissions": ["https://*/"],
   "action": {
