@@ -1,13 +1,12 @@
 // Saves options to chrome.storage
 function save_options(event) {
     event.preventDefault();
-    var apiUrl = event.target.apiUrl.value;
+    var appUrl = event.target.appUrl.value;
     var userId = event.target.userId.value;
     chrome.storage.sync.set({
-        apiUrl: apiUrl,
+        appUrl: appUrl,
         userId: userId
     }, function() {
-        // Update status to let user know options were saved.
         var status = document.getElementById('alert');
         status.textContent = 'Options saved.';
         status.setAttribute("style","");
@@ -22,13 +21,12 @@ function save_options(event) {
 function restore_options() {
     // Use default value color = 'red' and likesColor = true.
     chrome.storage.sync.get({
-        apiUrl: null,
+        appUrl: null,
         userId: null,
     }, function(items) {
-        document.getElementById('apiUrl').value = items.apiUrl;
+        document.getElementById('appUrl').value = items.appUrl;
         document.getElementById('userId').value = items.userId;
     });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('optionsform').addEventListener('submit',
-    save_options);
+document.getElementById('optionsform').addEventListener('submit',save_options);

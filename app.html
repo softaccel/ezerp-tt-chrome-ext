@@ -2,13 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-
+    <title>TimeTrackingWrapperApp</title>
+    <style>
+        .loading-overlay {
+            position: fixed; /* Sit on top of the page content */
+            width: 100%; /* Full width (cover the whole page) */
+            height: 100%; /* Full height (cover the whole page) */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #fdfdfd; /* Black background with opacity */
+            z-index: 100; /* Specify a stack order in case you're using a different order for other elements */
+            cursor: pointer; /* Add a pointer on hover */
+        }
+        .vertical-center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+    </style>
 </head>
-<body class="bg-info">
+<body style="border: 0; margin: 0; padding: 0">
+<div id="invalidApiUrl" class="loading-overlay" style="display: none">
+    <p class="vertical-center text-center" style="padding-left: 20px; padding-right: 20px">
+        Aplicatia nu este configurata.<br>Foloseste optiunile pentru a o configura.
+    </p>
+</div>
 <div class="container-fluid p-0 m-0" style="width: 300px; height: 300px">
-    <iframe src="ttclient.html" width="100%" height="100%" id="ttclient" frameborder="0"></iframe>
+    <iframe width="100%" height="100%" id="ttclient" style="border: 0; margin: 0;"></iframe>
 </div>
 <script src="js/jquery.js"></script>
 <script src="js/app.js"></script>

@@ -1,19 +1,16 @@
 {
   "name": "EzERP-Pontaj",
-  "description": "Timetracking on the next level!",
-  "version": "1.2",
+  "description": "Pontaj pt. EZERP!",
+  "version": "1.3",
   "manifest_version": 3,
   "update_url": "https://tools.softaccel.net/ezerp/ttext.xml",
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": ["storage", "scripting"],
   "content_security_policy": {
     "script-src": ["self","unsafe-eval"],
     "object-src": ["self"]
-  },
-  "sandbox": {
-    "pages": ["ttclient.html"]
   },
   "options_page": "options.html",
   "host_permissions": ["https://*/"],
